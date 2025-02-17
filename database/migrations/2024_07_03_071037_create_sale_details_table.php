@@ -16,9 +16,7 @@ return new class extends Migration
             $table->foreignId('salesID')->constrained('sales', 'id');
             $table->foreignId('productID')->constrained('products', 'id');
             $table->foreignId('warehouseID')->constrained('warehouses', 'id');
-            $table->float('price', 10);
             $table->float('qty');
-            $table->float('amount');
             $table->date('date');
             $table->bigInteger('refID');
             $table->timestamps();

@@ -22,22 +22,26 @@
                     <table class="table" id="buttons-datatables">
                         <thead>
                             <th>#</th>
+                            <th>Code</th>
                             <th>Name</th>
                             <th>Category</th>
                             <th>Purchase Price</th>
-                            <th>Sale Price</th>
+                          {{--   <th>Sale Price</th> --}}
                             <th>Default</th>
+                            <th>Alert</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
                             @foreach ($items as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
+                                    <td>{{ $item->code }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->category->name }}</td>
                                     <td>{{ number_format($item->pprice, 2) }}</td>
-                                    <td>{{ number_format($item->price, 2) }}</td>
+                                   {{--  <td>{{ number_format($item->price, 2) }}</td> --}}
                                     <td>{{ $item->isDefault }}</td>
+                                    <td>{{ $item->alert }}</td>
                                     <td>
                                         <button type="button" class="btn btn-info " data-bs-toggle="modal"
                                             data-bs-target="#edit_{{ $item->id }}">Edit</button>
@@ -56,6 +60,12 @@
                                                 @csrf
                                                 @method('patch')
                                                 <div class="modal-body">
+                                                    <div class="form-group mt-2">
+                                                        <label for="code">Code</label>
+                                                        <input type="text" name="code" required
+                                                            value="{{ $item->code }}" id="code"
+                                                            class="form-control">
+                                                    </div>
                                                     <div class="form-group mt-2">
                                                         <label for="name">Name</label>
                                                         <input type="text" name="name" required
@@ -85,11 +95,17 @@
                                                             class="form-control">
                                                     </div>
                                                     <div class="form-group mt-2">
+                                                        <label for="alert">Alert</label>
+                                                        <input type="number" step="any" name="alert" required
+                                                            value="{{ $item->alert }}" min="0" id="alert"
+                                                            class="form-control">
+                                                    </div>
+                                                   {{--  <div class="form-group mt-2">
                                                         <label for="price">Sale Price</label>
                                                         <input type="number" step="any" name="price" required
                                                             value="{{ $item->price }}" min="0" id="price"
                                                             class="form-control">
-                                                    </div>
+                                                    </div> --}}
                                                    {{--  <div class="form-group mt-2">
                                                         <label for="discount">Discount</label>
                                                         <input type="number" step="any" name="discount" required
@@ -128,6 +144,10 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mt-2">
+                            <label for="code">Code</label>
+                            <input type="text" name="code" required id="code" class="form-control">
+                        </div>
+                        <div class="form-group mt-2">
                             <label for="name">Name</label>
                             <input type="text" name="name" required id="name" class="form-control">
                         </div>
@@ -154,8 +174,10 @@
                                 class="form-control">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="price">Sale Price</label>
-                            <input type="number" step="any" name="price" required value="" min="0" id="price" class="form-control">
+                            <label for="alert">Alert</label>
+                            <input type="number" step="any" name="alert" required
+                                 min="0" id="alert"
+                                class="form-control">
                         </div>
                        {{--  <div class="form-group mt-2">
                             <label for="discount">Discount</label>

@@ -7,7 +7,7 @@
                     <div class="col-12">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-6"><h3> Create Sale </h3></div>
+                                <div class="col-6"><h3> Create Stock Out </h3></div>
                                 <div class="col-6 d-flex flex-row-reverse">
                                     <button onclick="window.close()" class="btn btn-danger">Close</button>
                                     <button type="button" class="btn btn-primary" style="margin-right:10px;" data-bs-toggle="modal" data-bs-target="#new">Add Product</button>
@@ -38,39 +38,16 @@
                                     <thead>
                                         <th width="20%">Product</th>
                                         <th class="text-center">Warehouse</th>
+                                        <th class="text-center">Stock</th>
                                         <th class="text-center">Qty</th>
-                                        <th class="text-center">Price</th>
-                                        <th class="text-center">Amount</th>
                                         <th></th>
                                     </thead>
                                     <tbody id="products_list"></tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="4" class="text-end">Total</th>
-                                            <th class="text-end" id="totalAmount">0.00</th>
-                                        </tr>
-                                    </tfoot>
+                                   
                                 </table>
                             </div>
-                            <div class="col-3"></div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="discount">Discount</label>
-                                    <input type="number" name="discount" oninput="updateTotal()" id="discount" step="any" value="0" class="form-control no_zero">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="dc">Delivery Charges</label>
-                                    <input type="number" name="dc" id="dc" oninput="updateTotal()" min="0" step="any" value="0" class="form-control no_zero">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="net">Net Amount</label>
-                                    <input type="number" name="net" id="net" step="any" readonly value="0" class="form-control">
-                                </div>
-                            </div>
+                           
+                            
                             <div class="col-3 mt-2">
                                 <div class="form-group">
                                     <label for="date">Date</label>
@@ -80,7 +57,7 @@
                             </div>
                             <div class="col-3 mt-2">
                                 <div class="form-group">
-                                    <label for="customer">Customer</label>
+                                    <label for="customer">Salesman</label>
                                     <select name="customerID" id="customerID" class="selectize1">
                                         @foreach ($customers as $customer)
                                             <option value="{{ $customer->id }}">{{ $customer->title }}</option>
@@ -92,33 +69,6 @@
                                     <input type="text" name="customerName" id="customerName" class="form-control">
                                 </div>
                             </div>
-
-                            <div class="col-3 mt-2">
-                                <div class="form-group">
-                                    <label for="account">Account</label>
-                                    <select name="accountID" id="account" class="selectize1">
-                                        @foreach ($accounts as $account)
-                                            <option value="{{ $account->id }}">{{ $account->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-3 mt-2">
-                                <div class="form-group">
-                                    <label for="status">Payment Status</label>
-                                    <select name="status" id="status1" class="form-control">
-                                        <option disabled value="advanced">Paid in Advance</option>
-                                        <option value="paid">Paid</option>
-                                        <option disabled value="pending">Pending</option>
-                                        <option disabled value="partial">Partial Payment</option>
-                                    </select>
-                                </div>
-                                <div class="form-group d-none paid mt-2">
-                                    <label for="paid">Paid Amount</label>
-                                    <input type="number" name="paid" id="paid" value="0" class="form-control">
-                                </div>
-                            </div>
-
                             <div class="col-12 mt-2">
                                 <div class="form-group">
                                     <label for="notes">Notes</label>
@@ -126,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-2">
-                                <button type="submit" class="btn btn-primary w-100">Create Sale</button>
+                                <button type="submit" class="btn btn-primary w-100">Create Vouchar</button>
                             </div>
                 </div>
             </form>
@@ -166,10 +116,10 @@
                                     value="0" min="0" id="pprice"
                                     class="form-control">
                             </div>
-                            <div class="form-group mt-2">
+                           {{--  <div class="form-group mt-2">
                                 <label for="price">Sale Price</label>
                                 <input type="number" step="any" required name="price" value="0" min="0" id="price" class="form-control">
-                            </div>
+                            </div> --}}
                            {{--  <div class="form-group mt-2">
                                 <label for="discount">Discount</label>
                                 <input type="number" step="any" name="discount" required value="0" min="0" id="discount" class="form-control">
@@ -240,9 +190,8 @@
                                 html += '<option value="' + warehouse.id + '" >' + warehouse.name + '</option>';
                             });
                         html += '</select></td>';
+                        html += '<td class="no-padding"><input type="number"  disabled value="'+product.stock+'" class="form-control text-center"></div></td>';
                         html += '<td class="no-padding"><input type="number" name="qty[]" oninput="updateChanges(' + id +')" min="0" step="any" value="0" class="form-control text-center" id="qty_' + id + '"></div></td>';
-                        html += '<td class="no-padding"><input type="number" name="price[]" oninput="updateChanges(' + id + ')" step="any" value="'+product.price+'" min="1" class="form-control text-center" id="price_' + id + '"></td>';
-                        html += '<td class="no-padding"><input type="number" name="amount[]" readonly step="any" value="0.00" min="0" class="form-control text-center" id="amount_' + id + '"></td>';
                         html += '<td> <span class="btn btn-sm btn-danger" onclick="deleteRow('+id+')">X</span> </td>';
                         html += '<input type="hidden" name="id[]" value="' + id + '">';
                         html += '<input type="hidden" id="stock_'+id+'" value="' + product.stock + '">';
@@ -336,25 +285,12 @@
         if(id == 2)
         {
             $(".customerName").removeClass("d-none");
-            $('#status1 option').each(function() {
-            var optionValue = $(this).val();
-            if (optionValue === 'advanced' || optionValue === 'pending' || optionValue === 'partial') {
-                $(this).prop('disabled', true);
-            }
-            if (optionValue === 'paid') {
-                $(this).prop('selected', true);
-            }
-            });
+           
         }
         else
         {
             $(".customerName").addClass("d-none");
-            $('#status1 option').each(function() {
-            var optionValue = $(this).val();
-            if (optionValue === 'advanced' || optionValue === 'pending' || optionValue === 'partial') {
-                $(this).prop('disabled', false);
-            }
-            });
+           
         }
     }
 

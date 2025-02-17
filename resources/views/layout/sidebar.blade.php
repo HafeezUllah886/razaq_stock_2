@@ -4,19 +4,19 @@
         <!-- Dark Logo-->
         <a href="{{route('dashboard')}}" class="logo logo-dark">
             <span class="logo-sm">
-                <h3 class="text-white">DC</h3>
+                <h3 class="text-white">{{projectNameShort()}}</h3>
             </span>
             <span class="logo-lg">
-                <h3 class="text-white mt-3">DELUXE CABLE</h3>
+                <h3 class="text-white mt-3">{{projectName()}}</h3>
             </span>
         </a>
         <!-- Light Logo-->
         <a href="{{route('dashboard')}}" class="logo logo-light">
             <span class="logo-sm">
-                <h3 class="text-white">DC</h3>
+                <h3 class="text-white">{{projectNameShort()}}</h3>
             </span>
             <span class="logo-lg">
-                <h3 class="text-white mt-3">DELUXE CABLE</h3>
+                <h3 class="text-white mt-3">{{projectName()}}</h3>
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -64,33 +64,16 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sales" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarApps">
-                        <i class="ri-shopping-cart-fill"></i><span data-key="t-apps">Sale</span>
+                        <i class="ri-shopping-cart-fill"></i><span data-key="t-apps">Stock Out</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sales">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a onclick="newWindow('{{ route('sale.create') }}')" class="nav-link"
-                                    data-key="t-chat">Create Sale</a>
+                                    data-key="t-chat">Create Stock Out</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('sale.index') }}" class="nav-link" data-key="t-chat"> Sales History</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#quot" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarApps">
-                        <i class="ri-shopping-cart-fill"></i><span data-key="t-apps">Quotation</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="quot">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a onclick="newWindow('{{ route('quotation.create') }}')" class="nav-link"
-                                    data-key="t-chat">Create Quotation</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('quotation.index') }}" class="nav-link" data-key="t-chat"> Quotation History</a>
+                                <a href="{{ route('sale.index') }}" class="nav-link" data-key="t-chat"> Stock Out History</a>
                             </li>
                         </ul>
                     </div>
@@ -98,16 +81,16 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#purchase" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarApps">
-                        <i class="ri-shopping-cart-line"></i><span data-key="t-apps">Purchase</span>
+                        <i class="ri-shopping-cart-line"></i><span data-key="t-apps">Stock In</span>
                     </a>
                     <div class="collapse menu-dropdown" id="purchase">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a onclick="newWindow('{{ route('purchase.create') }}')" class="nav-link"
-                                    data-key="t-chat">Create Purchase</a>
+                                    data-key="t-chat">Create Stock In</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('purchase.index') }}" class="nav-link" data-key="t-chat"> Purchase
+                                <a href="{{ route('purchase.index') }}" class="nav-link" data-key="t-chat"> Stock In
                                     History </a>
                             </li>
                         </ul>
@@ -121,16 +104,7 @@
                     <div class="collapse menu-dropdown" id="stock">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('product_stock.index', ['zero' => 'not_allowed']) }}" class="nav-link" data-key="t-chat">Stock</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('product_stock.index', ['zero' => 'allowed']) }}" class="nav-link" data-key="t-chat">Stock with Zero</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('product_stock.index', ['zero' => 'above_zero']) }}" class="nav-link" data-key="t-chat">Stock Above Zero</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('product_stock.index', ['zero' => 'below_zero']) }}" class="nav-link" data-key="t-chat">Stock Below Zero</a>
+                                <a href="{{ route('product_stock.index') }}" class="nav-link" data-key="t-chat">Stock</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('stockTransfer.index') }}" class="nav-link" data-key="t-chat">Stock Transfer</a>
@@ -176,18 +150,15 @@
                                     Business Accounts </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('accountsList', 'Customer') }}" class="nav-link"
-                                    data-key="t-checkboxs-radios">Customer Accounts</a>
+                                <a href="{{ route('accountsList', 'Salesman') }}" class="nav-link"
+                                    data-key="t-checkboxs-radios">Salesmans</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('accountsList', 'Vendor') }}" class="nav-link"
+                                <a href="{{ route('accountsList', 'Company') }}" class="nav-link"
                                     data-key="t-pickers">
-                                    Vendor Accounts </a>
+                                    Company Accounts </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('receivings.index') }}" class="nav-link"
-                                    data-key="t-input-masks">Payment Receiving</a>
-                            </li>
+                           
                             <li class="nav-item">
                                 <a href="{{ route('deposit_withdraw.index') }}" class="nav-link"
                                     data-key="t-input-masks">Deposit / Withdraw</a>

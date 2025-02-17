@@ -16,15 +16,14 @@ class accounts extends Model
         return $query->where('type', 'Business');
     }
 
-    public function scopeCustomer($query)
+    public function scopeSalesman($query)
     {
-        return $query->where('type', 'Customer');
+        return $query->where('type', 'Salesman');
     }
 
-    public function scopeVendor($query)
+    public function scopeCompany($query)
     {
-        return $query->where('type', 'Vendor');
-
+        return $query->where('type', 'Company');
     }
 
     public function transactions()

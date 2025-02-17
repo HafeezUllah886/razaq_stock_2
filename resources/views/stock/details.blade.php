@@ -11,7 +11,7 @@
                             <div class="card-header border-bottom-dashed p-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h1>DELUXE CABLES QUETTA</h1>
+                                        <h1>{{projectName()}}</h1>
                                     </div>
                                     <div class="flex-shrink-0 mt-sm-0 mt-3">
                                         <h3>Product Stock</h3>
@@ -62,8 +62,8 @@
                                                 <th scope="col">Date</th>
                                                 <th scope="col" class="text-start">Warehouse</th>
                                                 <th scope="col" class="text-start">Notes</th>
-                                                <th scope="col" class="text-end">Credit</th>
-                                                <th scope="col" class="text-end">Debit</th>
+                                                <th scope="col" class="text-end">Stock-In</th>
+                                                <th scope="col" class="text-end">Stock-Out</th>
                                                 <th scope="col" class="text-end">Balance</th>
                                             </tr>
                                         </thead>

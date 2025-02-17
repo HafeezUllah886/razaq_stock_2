@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3>Sales</h3>
+                    <h3>ISSUE VOUCHERS</h3>
 
                 </div>
                 <div class="card-body">
@@ -21,24 +21,20 @@
                     <table class="table" id="buttons-datatables">
                         <thead>
                             <th>#</th>
-                            <th>Customer</th>
+                            <th>Invoice</th>
+                            <th>Salesman</th>
                             <th>Date</th>
-                            <th>Amount</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
                             @foreach ($sales as $key => $sale)
-                                @php
-                                    $amount = $sale->total;
-                                    $paid = $sale->payments->sum('amount');
-                                    $due = $amount - $paid;
-                                @endphp
+                               
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
+                                    <td>{{ $sale->id }}</td>
                                     <td>{{ $sale->customer->title }}</td>
                                     <td>{{ date('d M Y', strtotime($sale->date)) }}</td>
-                                    <td>{{ number_format($amount) }}</td>
-                                   
+                            
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-soft-secondary btn-sm dropdown" type="button"

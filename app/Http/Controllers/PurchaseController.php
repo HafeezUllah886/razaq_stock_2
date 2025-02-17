@@ -42,7 +42,7 @@ class PurchaseController extends Controller
     {
         $products = products::orderby('name', 'asc')->get();
         $warehouses = warehouses::all();
-        $vendors = accounts::vendor()->get();
+        $vendors = accounts::company()->get();
         $accounts = accounts::business()->get();
         $cats = categories::orderBy('name', 'asc')->get();
         return view('purchase.create', compact('products', 'warehouses', 'vendors', 'accounts', 'cats'));
@@ -84,7 +84,6 @@ class PurchaseController extends Controller
                 {
                     $qty = $request->qty[$key];
                 $pprice = $request->pprice[$key];
-                $price = $request->price[$key];
                 $amount = $pprice * $qty;
                 $total += $amount;
 
@@ -93,7 +92,6 @@ class PurchaseController extends Controller
                         'purchaseID'    => $purchase->id,
                         'productID'     => $id,
                         'pprice'        => $pprice,
-                        'price'         => $price,
                         'qty'           => $qty,
                         'amount'        => $amount,
                         'date'          => $request->date,
@@ -107,7 +105,6 @@ class PurchaseController extends Controller
                 $product->update(
                     [
                         'pprice' => $pprice,
-                        'price'  => $price,
                     ]
                 );
                 }
@@ -199,7 +196,7 @@ class PurchaseController extends Controller
     {
         $products = products::orderby('name', 'asc')->get();
         $warehouses = warehouses::all();
-        $vendors = accounts::vendor()->get();
+        $vendors = accounts::Company()->get();
         $accounts = accounts::business()->get();
 
         return view('purchase.edit', compact('products', 'warehouses', 'vendors', 'accounts', 'purchase'));
@@ -251,7 +248,6 @@ class PurchaseController extends Controller
                 {
                     $qty = $request->qty[$key];
                 $pprice = $request->pprice[$key];
-                $price = $request->price[$key];
                 $amount = $pprice * $qty;
                 $total += $amount;
 
@@ -260,7 +256,6 @@ class PurchaseController extends Controller
                         'purchaseID'    => $purchase->id,
                         'productID'     => $id,
                         'pprice'        => $pprice,
-                        'price'         => $price,
                         'qty'           => $qty,
                         'amount'        => $amount,
                         'date'          => $request->date,
@@ -274,7 +269,6 @@ class PurchaseController extends Controller
                 $product->update(
                     [
                         'pprice' => $pprice,
-                        'price'  => $price,
                     ]
                 );
                 }

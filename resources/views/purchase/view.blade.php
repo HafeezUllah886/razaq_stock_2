@@ -6,14 +6,12 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="hstack gap-2 justify-content-end d-print-none p-2 mt-4">
-                                <a href="{{url('purchases/pdf/')}}/{{$purchase->id}}" class="btn btn-info ml-4"><i class="ri-file-line mr-4"></i> Generate PDF</a>
-                                <a href="https://web.whatsapp.com/" target="_blank" class="btn btn-success ml-4"><i class="ri-whatsapp-line mr-4"></i> Whatsapp</a>
                                 <a href="javascript:window.print()" class="btn btn-success ml-4"><i class="ri-printer-line mr-4"></i> Print</a>
                             </div>
                             <div class="card-header border-bottom-dashed p-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h1>DELUXE CABLES QUETTA</h1>
+                                        <h1>{{projectName()}}</h1>
                                     </div>
                                     <div class="flex-shrink-0 mt-sm-0 mt-3">
                                         <h3>Purchase Vouchar</h3>
@@ -37,7 +35,7 @@
                                     </div>
                                     <!--end col-->
                                     <div class="col-3">
-                                        <p class="text-muted mb-2 text-uppercase fw-semibold">Vendor</p>
+                                        <p class="text-muted mb-2 text-uppercase fw-semibold">Company</p>
                                         <h5 class="fs-14 mb-0">{{$purchase->vendor->title}}</h5>
                                         <h5 class="fs-14 mb-0">{{$purchase->vendorID == 3 ? $purchase->vendorName : ""}}</h5>
                                     </div>
@@ -65,7 +63,6 @@
                                                         <th scope="col" class="text-start">Product</th>
                                                         <th scope="col" class="text-start">Warehouse</th>
                                                         <th scope="col" class="text-end">P-Price</th>
-                                                        <th scope="col" class="text-end">S-Price</th>
                                                         <th scope="col" class="text-end">Qty</th>
                                                         <th scope="col" class="text-end">Amount</th>
                                                     </tr>
@@ -77,10 +74,8 @@
                                                         <td class="text-start p-1 m-1">{{$product->product->name}}</td>
                                                         <td class="text-start p-1 m-1">{{$product->warehouse->name}}</td>
                                                         <td class="text-end p-1 m-1">{{number_format($product->pprice,2)}}</td>
-                                                        <td class="text-end p-1 m-1">{{number_format($product->price,2)}}</td>
                                                         <td class="text-end p-1 m-1">{{number_format($product->qty)}}</td>
                                                         <td class="text-end p-1 m-1">{{number_format($product->amount,2)}}</td>
-
                                                        </tr>
                                                    @endforeach
                                                 </tbody>
@@ -117,8 +112,6 @@
                                         </table>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="card-footer">
                                 <p><strong>Notes: </strong>{{$purchase->notes}}</p>
@@ -153,7 +146,6 @@
     <script src="{{ asset('assets/libs/datatable/vfs_fonts.js')}}"></script>
     <script src="{{ asset('assets/libs/datatable/pdfmake.min.js')}}"></script>
     <script src="{{ asset('assets/libs/datatable/jszip.min.js')}}"></script>
-
     <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
 @endsection
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('vendorID')->constrained('accounts', 'id');
             $table->date('date');
+            $table->string('vendorName')->nullable();
             $table->float('discount')->default(0);
             $table->float('dc')->default(0);
             $table->float('total')->default(0);

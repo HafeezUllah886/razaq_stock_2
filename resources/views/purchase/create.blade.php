@@ -7,7 +7,7 @@
                     <div class="col-12">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-6"><h3> Create Purchase </h3></div>
+                                <div class="col-6"><h3> Create Stock In </h3></div>
 
                                 <div class="col-6 d-flex flex-row-reverse">
                                     <button onclick="window.close()" class="btn btn-danger">Close</button>
@@ -41,7 +41,6 @@
                                         <th width="30%">Item</th>
                                         <th width="10%" class="text-center">Warehouse</th>
                                         <th class="text-center">P-Price</th>
-                                        <th class="text-center">S-Price</th>
                                         <th class="text-center">Qty</th>
                                         <th class="text-end">Amount</th>
                                         <th></th>
@@ -49,7 +48,7 @@
                                     <tbody id="products_list"></tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="5" class="text-end">Total</th>
+                                            <th colspan="4" class="text-end">Total</th>
                                             <th class="text-end" id="totalAmount">0.00</th>
                                             <th></th>
                                         </tr>
@@ -89,7 +88,7 @@
                             </div>
                             <div class="col-3 mt-2">
                                 <div class="form-group">
-                                    <label for="vendor">Vendor</label>
+                                    <label for="vendor">Company</label>
                                     <select name="vendorID" id="vendorID" class="selectize1">
                                         @foreach ($vendors as $vendor)
                                             <option value="{{ $vendor->id }}">{{ $vendor->title }}</option>
@@ -129,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-2">
-                                <button type="submit" class="btn btn-primary w-100">Create Purchase</button>
+                                <button type="submit" class="btn btn-primary w-100">Create Stock In</button>
                             </div>
                 </div>
             </form>
@@ -162,10 +161,7 @@
                                     value="0" min="0" id="pprice"
                                     class="form-control">
                             </div>
-                            <div class="form-group mt-2">
-                                <label for="price">Sale Price</label>
-                                <input type="number" step="any" required name="price" value="0" min="0" id="price" class="form-control">
-                            </div>
+                           
                            {{--  <div class="form-group mt-2">
                                 <label for="discount">Discount</label>
                                 <input type="number" step="any" name="discount" required value="0" min="0" id="discount" class="form-control">
@@ -237,7 +233,6 @@
                             });
                         html += '</select></td>';
                         html += '<td class="no-padding"><input type="number" name="pprice[]" oninput="updateChanges(' + id + ')" step="any" value="'+product.pprice+'" min="1" class="form-control text-center no-padding" id="pprice_' + id + '"></td>';
-                        html += '<td class="no-padding"><input type="number" name="price[]" step="any" value="'+product.price+'" min="0" class="form-control text-center no-padding" id="price_' + id + '"></td>';
                         html += '<td class="no-padding"><input type="number" name="qty[]" oninput="updateChanges(' + id + ')" min="0" step="any" value="0" class="form-control text-center no-padding" id="qty_' + id + '"></td>';
                         html += '<td class="no-padding"><input type="number" name="amount[]" min="0.1" readonly required step="any" value="1" class="form-control text-center no-padding" id="amount_' + id + '"></td>';
                         html += '<td class="no-padding"> <span class="btn btn-sm btn-danger" onclick="deleteRow('+id+')">X</span> </td>';

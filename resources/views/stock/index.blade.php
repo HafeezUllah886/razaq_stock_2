@@ -5,79 +5,44 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h3>Products Stock </h3>
+                    <div class="col-3">
+                        <select name="category" id="category" class="form-control" onchange="filterByCategory(this.value)">
+                            <option value="0">All Categories</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" @selected($category->id == $cat)>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table" id="buttons-datatables">
                         <thead>
                             <th>#</th>
+                            <th>Code</th>
                             <th>Product</th>
                             <th>Category</th>
-                            <th>Stock</th>
+                            <th>Stock-In</th>
+                            <th>Stock-Out</th>
+                            <th>Avail Stock</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
                             @foreach ($products as $key => $product)
-                                @php
-                                    $stock = getStock($product->id);
-                                @endphp
-                                @php
-                                $stock = getStock($product->id);
-                            @endphp
-                            @if (request('zero') == 'allowed')
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->category->name }}</td>
-                                    <td>{{ number_format($stock, 2) }}</td>
-                                    <td>
-                                        <button class="btn btn-info" onclick="ViewDetails({{ $product->id }})">
-                                            Details
-                                        </button>
-                                    </td>
-                                </tr>
-                            @elseif (request('zero') == 'above_zero')
-                                @if ($stock > 0)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ number_format($stock, 2) }}</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="ViewDetails({{ $product->id }})">
-                                                Details
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endif
-                                @elseif (request('zero') == 'below_zero')
-                                @if ($stock < 0)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ number_format($stock, 2) }}</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="ViewDetails({{ $product->id }})">
-                                                Details
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @else
-                                @if ($stock != 0)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ number_format($stock, 2) }}</td>
-                                        <td>
-                                            <button class="btn btn-info" onclick="ViewDetails({{ $product->id }})">
-                                                Details
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endif
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $product->code }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->category->name }}</td>
+                                <td>{{ number_format(getStockCr($product->id), 2) }}</td>
+                                <td>{{ number_format(getStockDb($product->id), 2) }}</td>
+                                <td>{{ number_format(getStock($product->id), 2) }}</td>
+                                <td>
+                                    <button class="btn btn-info" onclick="ViewDetails({{ $product->id }})">
+                                        Details
+                                    </button>
+                                </td>
+                            </tr>
+                                
                             @endforeach
                         </tbody>
                     </table>
@@ -170,5 +135,10 @@
                 .replace(':to', to);
             window.open(url, "_blank", "width=1000,height=800");
         });
+
+        function filterByCategory(category) {
+            var url = "{{ route('product_stock.index') }}?category=" + category;
+            window.location.href = url;
+        }
     </script>
 @endsection

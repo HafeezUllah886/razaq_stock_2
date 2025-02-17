@@ -31,8 +31,8 @@
                                     <label for="type">Type</label>
                                     <select name="type" id="type" class="form-control">
                                         <option value="Business">Business</option>
-                                        <option value="Customer">Customer</option>
-                                        <option value="Vendor">Vendor</option>
+                                        <option value="Salesman">Salesman</option>
+                                        <option value="Company">Company</option>
                                     </select>
                                 </div>
                             </div>

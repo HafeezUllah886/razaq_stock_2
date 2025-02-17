@@ -49,7 +49,7 @@ class AccountsController extends Controller
             DB::beginTransaction();
 
                 $ref = getRef();
-                if($request->type == "Customer")
+                if($request->type == "Salesman")
                 {
                     $account = accounts::create(
                         [

@@ -88,7 +88,7 @@ return [
     'locale' => env('APP_LOCALE', 'en'),
 
     'domains' => [
-        'deluxe.test',
+        'razaq_stock_2.test',
         'deluxe-s.test',
         'deluxe.diamondquetta.com',
         'testmillat.diamondquetta.com',
@@ -96,14 +96,14 @@ return [
     ],
 
     'databases' => [
-        'deluxe',
+        'razaq2',
         'test',
     ],
 
     'files' =>
     [
-        '428030',
-        '87079'
+        '320259',
+        '320259'
     ],
 
     /*

@@ -60,6 +60,28 @@ function getStock($id){
     return $balance;
 }
 
+function getStockCr($id){
+    $stocks  = stock::where('productID', $id)->get();
+    $balance = 0;
+    foreach($stocks as $stock)
+    {
+        $balance += $stock->cr;
+    }
+
+    return $balance;
+}
+
+function getStockDb($id){
+    $stocks  = stock::where('productID', $id)->get();
+    $balance = 0;
+    foreach($stocks as $stock)
+    {
+        $balance += $stock->db;
+    }
+
+    return $balance;
+}
+
 function avgSalePrice($from, $to, $id)
 {
     $sales = sale_details::where('productID', $id);
@@ -123,5 +145,14 @@ function productStockValue($id)
     $price = avgPurchasePrice('all', 'all', $id);
 
     return $price * $stock;
+}
+
+function projectName()
+{
+    return "RAZAQ STOCK";
+}
+function projectNameShort()
+{
+    return "RS";
 }
 

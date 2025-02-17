@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-6"><h3> Edit Sale </h3></div>
+                            <div class="col-6"><h3> Edit Stock Out </h3></div>
                             <div class="col-6 d-flex flex-row-reverse"><button onclick="window.close()" class="btn btn-danger">Close</button></div>
                         </div>
                     </div>
@@ -44,9 +44,8 @@
                                     <thead>
                                         <th width="20%">Product</th>
                                         <th class="text-center">Warehouse</th>
+                                        <th class="text-center">Stock</th>
                                         <th class="text-center">Qty</th>
-                                        <th class="text-center">Price</th>
-                                        <th class="text-center">Amount</th>
                                         <th></th>
                                     </thead>
                                     <tbody id="products_list">
@@ -61,41 +60,17 @@
                                                     <option value="{{$warehouse->id}}" @selected($warehouse->id == $product->warehouseID)>{{$warehouse->name}}</option>
                                                 @endforeach
                                             </select></td>
-                                            <td class="no-padding"><input type="number" name="price[]" required step="any" value="{{$product->price}}" min="0" class="form-control text-center no-padding" id="price_{{$id}}"></td>
-                                            <td class="no-padding"><input type="number" name="qty[]" oninput="updateChanges({{$id}})" min="0" required step="any" value="{{$product->qty}}" class="form-control text-center no-padding" id="qty_{{$id}}"></td>
-                                            <td class="no-padding"><input type="number" name="amount[]" min="0.1" readonly required step="any" value="{{$product->amount}}" class="form-control text-center no-padding" id="amount_{{$id}}"></td>
+                                            <td class="no-padding"><input type="number" name="qty[]" required step="any" value="{{$product->qty}}" min="0" class="form-control text-center no-padding" id="qty_{{$id}}"></td>
+                                           
                                             <td class="no-padding"> <span class="btn btn-sm btn-danger" onclick="deleteRow({{$id}})">X</span> </td>
                                             <input type="hidden" name="id[]" value="{{$id}}">
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="4" class="text-end">Total</th>
-                                            <th class="text-end" id="totalAmount">0.00</th>
-                                        </tr>
-                                    </tfoot>
+                                
                                 </table>
                             </div>
                             <div class="col-3"></div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="discount">Discount</label>
-                                    <input type="number" name="discount" oninput="updateTotal()" id="discount" value="{{$sale->discount}}" step="any"  class="form-control no_zero">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="dc">Delivery Charges</label>
-                                    <input type="number" name="dc" id="dc" oninput="updateTotal()" min="0" value="{{$sale->dc}}" step="any"  class="form-control no_zero">
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="net">Net Amount</label>
-                                    <input type="number" name="net" id="net" step="any" readonly value="{{$sale->total}}" class="form-control">
-                                </div>
-                            </div>
                             <div class="col-3 mt-2">
                                 <div class="form-group">
                                     <label for="date">Date</label>
@@ -105,7 +80,7 @@
                             </div>
                             <div class="col-3 mt-2">
                                 <div class="form-group">
-                                    <label for="customer">Customer</label>
+                                    <label for="customer">Salesman</label>
                                     <select name="customerID" id="customerID" class="selectize1">
                                         @foreach ($customers as $customer)
                                             <option value="{{ $customer->id }}" @selected($customer->id == $sale->customerID)>{{ $customer->title }}</option>
@@ -118,31 +93,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-3 mt-2">
-                                <div class="form-group">
-                                    <label for="account">Account</label>
-                                    <select name="accountID" id="account" class="selectize1">
-                                        @foreach ($accounts as $account)
-                                            <option value="{{ $account->id }}">{{ $account->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-3 mt-2">
-                                <div class="form-group">
-                                    <label for="status">Payment Status</label>
-                                    <select name="status" id="status1" class="selectize1">
-                                        <option value="advanced">Paid in Advance</option>
-                                        <option value="paid">Paid</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="partial">Partial Payment</option>
-                                    </select>
-                                </div>
-                                <div class="form-group d-none paid mt-2">
-                                    <label for="paid">Paid Amount</label>
-                                    <input type="number" name="paid" id="paid" value="0" class="form-control">
-                                </div>
-                            </div>
 
                             <div class="col-12 mt-2">
                                 <div class="form-group">
@@ -151,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-2">
-                                <button type="submit" class="btn btn-primary w-100">Update Sale</button>
+                                <button type="submit" class="btn btn-primary w-100">Update Vouchar</button>
                             </div>
                 </div>
             </form>
@@ -212,9 +162,8 @@
                                 html += '<option value="' + warehouse.id + '" >' + warehouse.name + '</option>';
                             });
                         html += '</select></td>';
+                        html += '<td class="no-padding"><input type="number"  disabled value="'+product.stock+'" class="form-control text-center"></div></td>';
                         html += '<td class="no-padding"><input type="number" name="qty[]" oninput="updateChanges(' + id +')" min="0.1" required step="any" value="1" class="form-control text-center" id="qty_' + id + '"></div></td>';
-                        html += '<td class="no-padding"><input type="number" name="price[]" oninput="updateChanges(' + id + ')" required step="any" value="'+product.price+'" min="1" class="form-control text-center" id="price_' + id + '"></td>';
-                        html += '<td class="no-padding"><input type="number" name="amount[]" readonly step="any" value="0.00" min="0" class="form-control text-center" id="amount_' + id + '"></td>';
                         html += '<td> <span class="btn btn-sm btn-danger" onclick="deleteRow('+id+')">X</span> </td>';
                         html += '<input type="hidden" name="id[]" value="' + id + '">';
                         html += '<input type="hidden" id="stock_'+id+'" value="' + product.stock + '">';
@@ -271,28 +220,15 @@
         function checkAccount()
     {
         var id = $("#customerID").find(":selected").val();
-        if(id == 2)
+        if(id == 1)
         {
             $(".customerName").removeClass("d-none");
-            $('#status1 option').each(function() {
-            var optionValue = $(this).val();
-            if (optionValue === 'advanced' || optionValue === 'pending' || optionValue === 'partial') {
-                $(this).prop('disabled', true);
-            }
-            if (optionValue === 'paid') {
-                $(this).prop('selected', true);
-            }
-            });
+           
         }
         else
         {
             $(".customerName").addClass("d-none");
-            $('#status1 option').each(function() {
-            var optionValue = $(this).val();
-            if (optionValue === 'advanced' || optionValue === 'pending' || optionValue === 'partial') {
-                $(this).prop('disabled', false);
-            }
-            });
+          
         }
     }
 

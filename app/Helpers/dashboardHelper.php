@@ -6,10 +6,7 @@ use App\Models\purchase_details;
 use App\Models\sale_details;
 use Illuminate\Support\Facades\DB;
 
-function totalSales()
-{
-    return $sales = sale_details::sum('amount');
-}
+
 
 function totalPurchases()
 {
