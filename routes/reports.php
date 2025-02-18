@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\dailycashbookController;
 use App\Http\Controllers\ledgerReportController;
+use App\Http\Controllers\productPurchaseReportController;
 use App\Http\Controllers\profitController;
+use App\Http\Controllers\SalesmanReceiveReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -15,5 +17,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reports/ledger', [ledgerReportController::class, 'index'])->name('reportLedger');
     Route::get('/reports/ledger/{from}/{to}/{type}', [ledgerReportController::class, 'data'])->name('reportLedgerData');
+    
+    Route::get('/reports/purchase', [productPurchaseReportController::class, 'index'])->name('reportPurchase');
+    Route::get('/reports/purchase/{from}/{to}/{vendor}', [productPurchaseReportController::class, 'data'])->name('reportPurchaseData');
+
+    Route::get('/reports/sale', [SalesmanReceiveReportController::class, 'index'])->name('reportSale');
+    Route::get('/reports/sale/{from}/{to}/{salesman}', [SalesmanReceiveReportController::class, 'data'])->name('reportSaleData');
+
 
 });

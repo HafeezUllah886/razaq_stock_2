@@ -182,6 +182,14 @@
                     <div class="collapse menu-dropdown" id="sidebarReports">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
+                                <a href="{{ route('reportPurchase') }}" class="nav-link"
+                                    data-key="t-basic-elements">Product Stock-In Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('reportSale') }}" class="nav-link"
+                                    data-key="t-basic-elements">Product Stock-Out Report</a>
+                            </li>
+                           {{--  <li class="nav-item">
                                 <a href="{{ route('reportProfit') }}" class="nav-link"
                                     data-key="t-basic-elements">Profit / Loss</a>
                             </li>
@@ -192,7 +200,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('reportLedger') }}" class="nav-link"
                                     data-key="t-basic-elements">Ledger Report</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>

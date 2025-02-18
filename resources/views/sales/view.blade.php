@@ -49,7 +49,9 @@
                                         <thead>
                                             <tr class="table-active">
                                                 <th scope="col" style="width: 50px;">#</th>
+                                                <th scope="col" class="text-start">Code</th>
                                                 <th scope="col" class="text-start">Product</th>
+                                                <th scope="col" class="text-start">Category</th>
                                                 <th scope="col" class="text-end">Qty</th>
                                             </tr>
                                         </thead>
@@ -57,7 +59,9 @@
                                            @foreach ($sale->details as $key => $product)
                                                <tr class="border-1 border-dark">
                                                 <td class="m-1 p-1 border-1 border-dark">{{$key+1}}</td>
+                                                <td class="text-start m-1 p-1 border-1 border-dark">{{$product->product->code}}</td>
                                                 <td class="text-start m-1 p-1 border-1 border-dark">{{$product->product->name}}</td>
+                                                <td class="text-start m-1 p-1 border-1 border-dark">{{$product->product->category->name}}</td>
                                                 <td class="text-end m-1 p-1 border-1 border-dark">{{number_format($product->qty)}}</td>
                                                
                                                </tr>
