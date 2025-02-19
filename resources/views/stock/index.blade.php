@@ -21,9 +21,11 @@
                             <th>Code</th>
                             <th>Product</th>
                             <th>Category</th>
+                            <th>Price</th>
                             <th>Stock-In</th>
                             <th>Stock-Out</th>
                             <th>Avail Stock</th>
+                            <th>Stock Value</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
@@ -33,9 +35,11 @@
                                 <td>{{ $product->code }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->category->name }}</td>
+                                <td>{{ $product->pprice }}</td>
                                 <td>{{ number_format(getStockCr($product->id), 2) }}</td>
                                 <td>{{ number_format(getStockDb($product->id), 2) }}</td>
                                 <td>{{ number_format(getStock($product->id), 2) }}</td>
+                                <td>{{ number_format(productStockValue($product->id), 2) }}</td>
                                 <td>
                                     <button class="btn btn-info" onclick="ViewDetails({{ $product->id }})">
                                         Details

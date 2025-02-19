@@ -223,7 +223,7 @@ class SalesController extends Controller
 
     public function getSignleProduct($id)
     {
-        $product = products::with('unit')->find($id);
+        $product = products::with('category')->find($id);
         $product->stock = getStock($id);
         return $product;
     }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ledgerReportController;
 use App\Http\Controllers\productPurchaseReportController;
 use App\Http\Controllers\profitController;
 use App\Http\Controllers\SalesmanReceiveReportController;
+use App\Http\Controllers\WarehouseReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -23,6 +24,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reports/sale', [SalesmanReceiveReportController::class, 'index'])->name('reportSale');
     Route::get('/reports/sale/{from}/{to}/{salesman}', [SalesmanReceiveReportController::class, 'data'])->name('reportSaleData');
+    
+    Route::get('/reports/warehouse', [WarehouseReportController::class, 'index'])->name('reportWarehouse');
+    Route::get('/reports/warehouse/{warehouse}', [WarehouseReportController::class, 'data'])->name('reportWarehouseData');
 
 
 });

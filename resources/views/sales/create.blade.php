@@ -27,7 +27,7 @@
                                     <select name="product" class="selectize" id="product">
                                         <option value=""></option>
                                         @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                            <option value="{{ $product->id }}">{{$product->code}} - {{ $product->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -36,7 +36,9 @@
 
                                 <table class="table table-striped table-hover">
                                     <thead>
+                                        <th>Code</th>
                                         <th width="20%">Product</th>
+                                        <th class="text-center">Category</th>
                                         <th class="text-center">Warehouse</th>
                                         <th class="text-center">Stock</th>
                                         <th class="text-center">Qty</th>
@@ -184,7 +186,9 @@
                     } else {
                         var id = product.id;
                         var html = '<tr id="row_' + id + '">';
+                        html += '<td class="no-padding">' + product.code + '</td>';
                         html += '<td class="no-padding">' + product.name + '</td>';
+                        html += '<td class="no-padding">' + product.category.name + '</td>';
                         html += '<td class="no-padding"><select name="warehouse[]" class="form-control text-center no-padding" id="warehouse_' + id + '">';
                             warehouses.forEach(function(warehouse) {
                                 html += '<option value="' + warehouse.id + '" >' + warehouse.name + '</option>';

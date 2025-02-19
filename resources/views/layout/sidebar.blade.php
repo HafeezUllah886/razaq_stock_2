@@ -189,6 +189,10 @@
                                 <a href="{{ route('reportSale') }}" class="nav-link"
                                     data-key="t-basic-elements">Product Stock-Out Report</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('reportWarehouse') }}" class="nav-link"
+                                    data-key="t-basic-elements">Warehouse Report</a>
+                            </li>
                            {{--  <li class="nav-item">
                                 <a href="{{ route('reportProfit') }}" class="nav-link"
                                     data-key="t-basic-elements">Profit / Loss</a>

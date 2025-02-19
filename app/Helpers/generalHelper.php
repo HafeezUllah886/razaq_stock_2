@@ -60,8 +60,30 @@ function getStock($id){
     return $balance;
 }
 
+function getStockByWarehouse($id, $warehouse){
+    $stocks  = stock::where('productID', $id)->where('warehouseID', $warehouse)->get();
+    $balance = 0;
+    foreach($stocks as $stock)
+    {
+        $balance += $stock->cr;
+        $balance -= $stock->db;
+    }
+
+    return $balance;
+}
+
 function getStockCr($id){
     $stocks  = stock::where('productID', $id)->get();
+    $balance = 0;
+    foreach($stocks as $stock)
+    {
+        $balance += $stock->cr;
+    }
+
+    return $balance;
+}
+function getWarehouseProductCr($id, $warehouse){
+    $stocks  = stock::where('productID', $id)->where('warehouseID', $warehouse)->get();
     $balance = 0;
     foreach($stocks as $stock)
     {
@@ -73,6 +95,16 @@ function getStockCr($id){
 
 function getStockDb($id){
     $stocks  = stock::where('productID', $id)->get();
+    $balance = 0;
+    foreach($stocks as $stock)
+    {
+        $balance += $stock->db;
+    }
+
+    return $balance;
+}
+function getWarehouseProductDb($id, $warehouse){
+    $stocks  = stock::where('productID', $id)->where('warehouseID', $warehouse)->get();
     $balance = 0;
     foreach($stocks as $stock)
     {
@@ -142,6 +174,14 @@ function stockValue()
 function productStockValue($id)
 {
     $stock = getStock($id);
+    $price = avgPurchasePrice('all', 'all', $id);
+
+    return $price * $stock;
+}
+
+function warehouseProductStockValue($id, $warehouse)
+{
+    $stock = getStockByWarehouse($id, $warehouse);
     $price = avgPurchasePrice('all', 'all', $id);
 
     return $price * $stock;

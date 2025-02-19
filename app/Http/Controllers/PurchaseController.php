@@ -370,7 +370,7 @@ class PurchaseController extends Controller
 
     public function getSignleProduct($id)
     {
-        $product = products::find($id);
+        $product = products::with('category')->find($id);
         return $product;
     }
 }

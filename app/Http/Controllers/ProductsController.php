@@ -32,16 +32,11 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'name' => "unique:products,name",
-                'code' => "unique:products,code"
-            ],
-            [
-            'name.unique' => "Product already Existing",
-            'code.unique' => "Product Code already Existing",
-            ]
-        );
+        $check = products::where(['name' => $request->name, 'code' => $request->code, 'catID' => $request->catID])->count();
+        if($check > 0)
+        {
+            return back()->with('error', 'Product already Existing');
+        }
 
         products::create($request->all());
 
