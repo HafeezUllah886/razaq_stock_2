@@ -20,7 +20,7 @@ class WarehouseReportController extends Controller
         $products = products::all();
         foreach($products as $product)
         {
-            $product->stock = getStock($product->id, $warehouse->id);
+            $product->stock = getStockByWarehouse($product->id, $warehouse->id);
             $product->stock_cr = getWarehouseProductCr($product->id, $warehouse->id);
             $product->stock_db = getWarehouseProductDb($product->id, $warehouse->id);
             $product->stock_value = warehouseProductStockValue($product->id, $warehouse->id);

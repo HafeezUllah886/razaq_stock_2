@@ -51,6 +51,7 @@
                                                 <th scope="col" class="text-start">Code</th>
                                                 <th scope="col" class="text-start">Product</th>
                                                 <th scope="col" class="text-start">Category</th>
+                                                <th scope="col">Price</th>
                                                 <th scope="col">Stock In</th>
                                                 <th scope="col">Stock Out</th>
                                                 <th scope="col">Current Stock</th>
@@ -71,6 +72,7 @@
                                                 <td class="text-start">{{ $product->code }}</td>
                                                 <td class="text-start">{{ $product->name }}</td>
                                                 <td class="text-start">{{ $product->category->name }}</td>
+                                                <td class="text-start">{{ $product->pprice }}</td>
                                                 <td class="text-end">{{ number_format($product->stock_cr, 2) }}</td>
                                                 <td class="text-end">{{ number_format($product->stock_db, 2) }}</td>
                                                 <td class="text-end">{{ number_format($product->stock, 2) }}</td>
