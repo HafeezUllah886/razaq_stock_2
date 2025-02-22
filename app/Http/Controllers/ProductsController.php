@@ -64,18 +64,14 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'name' => "unique:products,name,".$id,
-                'code' => "unique:products,code,".$id
-            ],
-            [
-            'name.unique' => "Product already Existing",
-            'code.unique' => "Product Code already Existing",
-            ]
-        );
+        $check = products::where(['name' => $request->name, 'code' => $request->code, 'catID' => $request->catID])->where('id', '!=', $id)->count();
+        if($check > 0)
+        {
+            return back()->with('error', 'Product already Existing');
+        }
 
         $product = products::find($id);
+        
         $product->update($request->all());
 
         return back()->with('success', 'Product Updated');

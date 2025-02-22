@@ -9,7 +9,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $remember_token
      * @property int $role
-     * @property hashed $password
+     * @property string $password
      * @property \Illuminate\Support\Carbon|null $email_verified_at
      * @property string $email
      * @property string $name
@@ -282,8 +282,8 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|accounts whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|accounts whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|accounts business()
-     * @method static \Illuminate\Database\Eloquent\Builder|accounts customer()
-     * @method static \Illuminate\Database\Eloquent\Builder|accounts vendor()
+     * @method static \Illuminate\Database\Eloquent\Builder|accounts salesman()
+     * @method static \Illuminate\Database\Eloquent\Builder|accounts company()
      * @method static \Illuminate\Database\Eloquent\Builder|accounts newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|accounts newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|accounts query()
@@ -769,8 +769,8 @@ namespace App\Models {
      * @property int $refID
      * @property string $type
      * @property string|null $notes
-     * @property date $date
-     * @property double $amount
+     * @property string $date
+     * @property float $amount
      * @property int $accountID
      * @property int $id
      * @property-read \App\Models\accounts $account
@@ -1267,8 +1267,8 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string $notes
-     * @property double $amount
-     * @property date $date
+     * @property float $amount
+     * @property string $date
      * @property int $catID
      * @property int $accountID
      * @property int $id
@@ -1523,8 +1523,8 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
-     * @property double $amount
-     * @property date $date
+     * @property float $amount
+     * @property string $date
      * @property int $userID
      * @property int $toID
      * @property int $fromID
@@ -1780,9 +1780,9 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property double $discount
-     * @property double $price
-     * @property double $pprice
+     * @property int $alert
+     * @property string|null $code
+     * @property float $pprice
      * @property string $isDefault
      * @property int $catID
      * @property string $name
@@ -1796,8 +1796,8 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|products whereCatid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|products whereIsdefault($value)
      * @method static \Illuminate\Database\Eloquent\Builder|products wherePprice($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|products wherePrice($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|products whereDiscount($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|products whereCode($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|products whereAlert($value)
      * @method static \Illuminate\Database\Eloquent\Builder|products whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|products whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|products newModelQuery()
@@ -2036,16 +2036,16 @@ namespace App\Models {
     /**
      * App\Models\purchase
      *
-     * @property string|null $vendorName
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
      * @property string|null $inv
-     * @property double $total
-     * @property double $dc
-     * @property double $discount
-     * @property date $date
+     * @property float $total
+     * @property float $dc
+     * @property float $discount
+     * @property string|null $vendorName
+     * @property string $date
      * @property int $vendorID
      * @property int $id
      * @property-read \App\Models\accounts $vendor
@@ -2056,6 +2056,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereVendorid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereDate($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|purchase whereVendorname($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereDiscount($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereDc($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereTotal($value)
@@ -2064,7 +2065,6 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereRefid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|purchase whereVendorname($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|purchase newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|purchase query()
@@ -2304,11 +2304,10 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
-     * @property date $date
-     * @property double $amount
-     * @property double $qty
-     * @property float $price
-     * @property float $pprice
+     * @property string $date
+     * @property float $amount
+     * @property float $qty
+     * @property mixed $pprice
      * @property int $warehouseID
      * @property int $productID
      * @property int $purchaseID
@@ -2320,7 +2319,6 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|purchase_details whereProductid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase_details whereWarehouseid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase_details wherePprice($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|purchase_details wherePrice($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase_details whereQty($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase_details whereAmount($value)
      * @method static \Illuminate\Database\Eloquent\Builder|purchase_details whereDate($value)
@@ -2567,8 +2565,8 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
-     * @property double $amount
-     * @property date $date
+     * @property float $amount
+     * @property string $date
      * @property int $accountID
      * @property int $purchaseID
      * @property int $id
@@ -2821,11 +2819,11 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $notes
-     * @property double|null $total
-     * @property double $dc
-     * @property double $discount
-     * @property date $validTill
-     * @property date $date
+     * @property float|null $total
+     * @property float $dc
+     * @property float $discount
+     * @property string $validTill
+     * @property string $date
      * @property string|null $customerAddress
      * @property string $customerName
      * @property int $id
@@ -3080,9 +3078,9 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property double $amount
-     * @property double $qty
-     * @property double $price
+     * @property float $amount
+     * @property float $qty
+     * @property float $price
      * @property int $productID
      * @property int $quotID
      * @property int $id
@@ -3578,10 +3576,8 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
-     * @property date $date
-     * @property double $amount
-     * @property double $qty
-     * @property float $price
+     * @property string $date
+     * @property float $qty
      * @property int $warehouseID
      * @property int $productID
      * @property int $salesID
@@ -3591,9 +3587,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereSalesid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereProductid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereWarehouseid($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|sale_details wherePrice($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereQty($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereAmount($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereDate($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereRefid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sale_details whereCreatedAt($value)
@@ -3838,8 +3832,8 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
-     * @property double $amount
-     * @property date $date
+     * @property float $amount
+     * @property string $date
      * @property int $accountID
      * @property int $salesID
      * @property int $id
@@ -4090,15 +4084,12 @@ namespace App\Models {
     /**
      * App\Models\sales
      *
-     * @property string|null $customerName
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
-     * @property double $total
-     * @property double $dc
-     * @property double $discount
-     * @property date $date
+     * @property string $date
+     * @property string|null $customerName
      * @property int $customerID
      * @property int $id
      * @property-read \App\Models\accounts $customer
@@ -4108,15 +4099,12 @@ namespace App\Models {
      * @property-read int|null $payments_count
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereCustomerid($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|sales whereCustomername($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereDate($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|sales whereDiscount($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|sales whereDc($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|sales whereTotal($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereNotes($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereRefid($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|sales whereCustomername($value)
      * @method static \Illuminate\Database\Eloquent\Builder|sales newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|sales newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|sales query()
@@ -4358,9 +4346,9 @@ namespace App\Models {
      * @property int $warehouseID
      * @property int $refID
      * @property string|null $notes
-     * @property double $db
-     * @property double $cr
-     * @property date $date
+     * @property float $db
+     * @property float $cr
+     * @property string $date
      * @property int $productID
      * @property int $id
      * @property-read \App\Models\warehouses $warehouse
@@ -4614,7 +4602,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
-     * @property date $date
+     * @property string $date
      * @property int $userID
      * @property int $toID
      * @property int $fromID
@@ -4872,7 +4860,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
-     * @property double $qty
+     * @property float $qty
      * @property int $productID
      * @property int $transferID
      * @property int $id
@@ -5124,7 +5112,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string $priority
      * @property string $status
-     * @property date $dueDate
+     * @property string $dueDate
      * @property string $title
      * @property int $id
      * @method static \Illuminate\Database\Eloquent\Builder|todo whereId($value)
@@ -5374,9 +5362,9 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string $notes
-     * @property float $db
-     * @property float $cr
-     * @property date $date
+     * @property mixed $db
+     * @property mixed $cr
+     * @property string $date
      * @property int $accountID
      * @property int $id
      * @property-read \App\Models\accounts $account
@@ -5629,8 +5617,8 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property int $refID
      * @property string|null $notes
-     * @property date $date
-     * @property double $amount
+     * @property string $date
+     * @property float $amount
      * @property int $to
      * @property int $from
      * @property int $id
@@ -5883,7 +5871,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property double $value
+     * @property float $value
      * @property string $name
      * @property int $id
      * @method static \Illuminate\Database\Eloquent\Builder|units whereId($value)
